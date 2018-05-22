@@ -1,0 +1,16 @@
+- name: Prerequisites- Install Java
+  yum: pkg=java state=latest update_cache=yes
+- name: Jenkins Install- Enable the Jenkins repository
+  yum_repository: 
+    name: jenkins
+    description: Jenkins repository to install Jenkins server
+    baseurl: '{{ jenkins_base_url }}'
+    gpgkey: '{{ jenkins_key_url }}'
+    enabled: yes
+    gpgcheck: no
+    state: present
+- name: Jenkins Install- Installing Jenkins package
+  yum: pkg=jenkins state=latest
+  notify: 
+    - start Jenkins
+    - wait for Jenkins_start

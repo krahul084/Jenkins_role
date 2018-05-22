@@ -1,0 +1,8 @@
+--- # Playbook to install Jenkins server
+- hosts: vm1:vm2 
+  user: ansible
+  connection: ssh
+  sudo: yes
+  gather_facts: yes
+  roles: 
+   - { role: Jenkins_role, when: "ansible_os_family == 'RedHat'"}

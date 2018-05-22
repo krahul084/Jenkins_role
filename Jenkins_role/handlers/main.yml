@@ -1,0 +1,7 @@
+- name: start Jenkins
+  service: name=jenkins state=started enabled=yes
+- name: wait for Jenkins_start
+  wait_for:
+     port: 8080
+     state: started
+- debug: msg="Jenkins Installed Successfully"
